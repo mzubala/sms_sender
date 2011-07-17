@@ -1,8 +1,45 @@
 SmsSender
 =========
 
-Introduction goes here.
+This plugin aims to provide very easy way to send an sms from your Rails app.
+The service used for sending sms messages is Polish http://smsapi.pl. In order
+to use the plugin you have to sign up at http://smsapi.pl. They give you a few
+free smses, so you can test how the plugin works for you without paying.
 
+Installation
+=============
+
+To install the plugin, just add it in your gemfile:
+
+gem "sms_sender"
+
+Configuration
+==============
+
+All you need to do is add following lines in your config/application.rb:
+
+config.sms_sender_login="your login at smsapi.pl"
+config.sms_sender_password="your password at smsapi.pl"
+config.sms_sender_eco=1
+
+Alternatively, if you don't want to send eco smses, you comment the last line and add:
+
+#config.sms_sender_eco=1
+config.sms_sender_from="5555"
+
+You may also wish to send test requests to smsapi while you develop your app. I always use
+it development mode. Just add in config/development.rb:
+
+config.sms_sender_test=1
+
+Usage
+=====
+
+The plugin adds a method:
+
+send_sms(telephone, text)
+
+This method is available in all your controllers. When sth goes wrong it will rise SmsSender
 
 Example
 =======
