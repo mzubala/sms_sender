@@ -32,6 +32,9 @@ it development mode. Just add in config/development.rb:
 
 config.sms_sender_test=1
 
+With this the plugin will send requests to smsapi, but you will not be charged and people
+will not get any messages.
+
 Usage
 =====
 
@@ -39,12 +42,39 @@ The plugin adds a method:
 
 send_sms(telephone, text)
 
-This method is available in all your controllers. When sth goes wrong it will rise SmsSender
+This method is available in all your controllers. When sth goes wrong it will raise SmsApiError,
+so it's wise to write:
 
-Example
+begin
+  send_sms("666", "hello world")
+rescue SmsApiError => e
+  logger.error "Sms api failed with error #{e.error_code}"
+  .... other error handling code
+end
+
+Testing
 =======
 
-Example goes here.
+When you run your tests the plugin does not send any requests to smsapi. Instead it uses
+a fake implementation of sender and gives you two extra assertions. In your tests you may write:
 
+assert_sms_sent "6666", "hello world"
 
-Copyright (c) 2011 [name of plugin creator], released under the MIT license
+This will be passed if somewhere in your code there was a call
+
+send_sms "6666", "hellow world"
+
+Be careful though, assert_sms_sent will be passed once only. If you call it twice without
+a proper call to send_sms, it will fail.
+
+On the other hand you may want to check:
+
+assert_no_sms_sent
+
+That will be passed iff there was no calls to send_sms.
+
+Both assertions are added to Test::Unit::Assertions. They work in test/unit tests, as well as
+in RSpec and Cucumber.
+
+======
+Copyright (c) 2011 RocketMind Software, released under the MIT license.
