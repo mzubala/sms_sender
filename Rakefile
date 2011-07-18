@@ -34,7 +34,7 @@ PKG_FILES = FileList[
 
 spec = Gem::Specification.new do |s|
   s.name = "sms_sender"
-  s.version = "0.0.1"
+  s.version = "0.0.3"
   s.author = "Maciej Zubala - RocketMind Software"
   s.email = "maciej.zubala@rocketmind.pl"
   s.platform = Gem::Platform::RUBY

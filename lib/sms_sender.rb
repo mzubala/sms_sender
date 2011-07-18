@@ -9,3 +9,8 @@ module SmsSender
   end
 
 end
+
+require "message"
+require "test_sender"
+require "sms_api_sender"
+require "action_controller_ext"

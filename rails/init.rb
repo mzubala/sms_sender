@@ -1,5 +1,0 @@
-require "action_controller_ext"
-require "sms_sender"
-require "message"
-require "test_sender"
-require "sms_api_sender"
