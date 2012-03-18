@@ -25,7 +25,7 @@ module SmsSender
       res = http.start { |http| http.request(req) }
       @logger.info "Sms api request finished processing with response #{res.body}"
       if sms_not_sent? res
-        raise SmsApiError res.code
+        raise SmsApiError.new(res.code)
       end
     end
 
